@@ -16,6 +16,7 @@ public class CarroService {
 		
 	@Autowired
 	CarroRepository repository;
+
 	
 	public Carro search(Integer id) throws ObjectNotFoundException {
 		Optional<Carro> carro = repository.findById(id);
@@ -39,6 +40,8 @@ public class CarroService {
 		Carro carroAntigo = search(carro.getId());
 		carroAntigo.setModelo(carro.getModelo());
 		carroAntigo.setChave(carro.getChave());
+		carroAntigo.setDocumento(carro.getDocumento());
+		carroAntigo.setFabricante(carro.getFabricante());
 		
 		return save(carroAntigo);
 	}

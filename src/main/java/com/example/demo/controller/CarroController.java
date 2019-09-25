@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.Fabricante;
 import com.example.demo.service.ChaveService;
+import com.example.demo.service.DocumentoService;
+import com.example.demo.service.FabricanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,12 @@ public class CarroController {
 
 	@Autowired
 	private ChaveService chaveService;
+
+	@Autowired
+	private DocumentoService documentoService;
+
+	@Autowired
+	private FabricanteService fabricanteService;
 	
 	@GetMapping("/listar")
 	public ModelAndView listarCarros() {
@@ -35,6 +44,8 @@ public class CarroController {
 	public ModelAndView cadastrarCarro() {
 		ModelAndView mv = new ModelAndView("carro/cadastraCarro");
 		mv.addObject("chaves", chaveService.searchAll());
+		mv.addObject("documentos", documentoService.searchAll());
+		mv.addObject("fabricantes", fabricanteService.searchAll());
 		mv.addObject("carro", new Carro());
 		return mv;		
 	}
@@ -54,9 +65,11 @@ public class CarroController {
 	@GetMapping("/alterar/{id}")
 	public ModelAndView alterarCarro(@PathVariable("id") Integer id) throws ObjectNotFoundException {
 		ModelAndView mv = new ModelAndView("carro/alteraCarro");
-		mv.addObject("chaves", chaveService.searchAll());
 		mv.addObject("carro", service.search(id));
-		return mv;		
+		mv.addObject("chaves", chaveService.searchAll());
+		mv.addObject("documentos", documentoService.searchAll());
+		mv.addObject("fabricantes", fabricanteService.searchAll());
+		return mv;
 	}
 	
 	@PostMapping("/alterar")

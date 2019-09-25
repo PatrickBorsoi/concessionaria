@@ -32,6 +32,19 @@
 								<option value="">Selecione a chave</option>
 								<option th:each="chave : ${chaves}" th:value="${chave.id}" th:text="${chave.id}"></option>
 							</select>
+
+							<label>Documento</label>
+							<select class="form-control" th:field="*{documento}">
+								<option value="">Selecione o Documento</option>
+								<option th:each="documento : ${documentos}" th:value="${documento.id}" th:text="${documento.nome}"></option>
+							</select>
+
+							<label>Fabricante</label>
+							<select class="form-control" th:field="*{fabricante}">
+								<option value="">Selecione a Fabricante</option>
+								<option th:each="fabricante : ${fabricantes}" th:value="${fabricante.id}" th:text="${fabricante.nome}"></option>
+							</select>
+
 						</div>
 					</fieldset>
 				</div>
